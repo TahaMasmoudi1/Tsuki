@@ -1,0 +1,51 @@
+
+{   
+    "products":[
+{
+    "id":1,
+    "title":"T-shirt Spacetoon",
+    "price":"40,000TND",
+     "image":["https://hamedia.b-cdn.net/catalog/product/cache/1/small_image/1920x/17f82f742ffe127f42dca9de82fb58b1/0/0/0029167_1.jpg"],
+    "rating":[],
+    "category":["T-shirt"],
+    "stock":[20],
+    "description":"45dt"
+},
+{
+    "id":2,
+    "title":"T-shirt lotfi bouchnak",
+    "price":"39,990 TND",
+    "image":["https://hamedia.b-cdn.net/catalog/product/cache/1/small_image/440x/17f82f742ffe127f42dca9de82fb58b1/0/0/0029355_1.jpg"],
+    "rating":[],
+    "category":["T-shirt"],
+    "stock":[20]
+},   
+{
+    "id":3,
+    "title":"T-shirt quote ",
+    "price":"42.000 TND",
+    "image":["https://hamedia.b-cdn.net/catalog/product/cache/1/small_image/440x/17f82f742ffe127f42dca9de82fb58b1/0/0/0029646_1.jpg"],
+    "rating":[],
+    "category":["T-shirt"],
+    "stock":[20]    
+},
+{
+    "id":4,
+    "title":"T-shirt choufli hal ",
+    "price":"35.000 TND",
+    "image":["https://hamedia.b-cdn.net/catalog/product/cache/1/small_image/440x/17f82f742ffe127f42dca9de82fb58b1/2/_/2_20_1.jpg"],
+    "rating":[],
+    "category":["T-shirt"],
+    "stock":[20]  
+}
+]
+}
+
+
+
+
+
+
+
+
+

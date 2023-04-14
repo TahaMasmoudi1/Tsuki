@@ -1,0 +1,70 @@
+.textdiv{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    
+   
+}
+.liste{
+    padding: 20px;
+    text-decoration: none;
+}
+@font-face {
+    font-family: bonzai;
+    src: url(./bonzai.ttf);
+}
+
+
+
+
+.discoverlist{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 50%;
+    height: 120px;
+    text-decoration: none;
+
+    padding: 12px;
+    list-style: none;
+
+    
+   
+
+}
+.discoverlist li{
+    padding: 10px;
+}
+.litext{
+    font-size: 20px;
+}
+.img{
+    height: 120px;
+    width:auto;
+    margin-top: 15px;
+    margin-left: 40px;
+    
+} 
+
+ .bigdiv{ 
+    background-color: white;
+    display: flex;
+
+ }
+ .icons{
+    width: 50%;
+ }
+ .icons ul{
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+
+ }
+ .icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10px;
+ }
