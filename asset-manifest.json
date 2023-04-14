@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/Tsuki/static/css/main.b5838503.css",
+    "main.js": "/Tsuki/static/js/main.8428d72d.js",
+    "static/js/787.28cb0dcd.chunk.js": "/Tsuki/static/js/787.28cb0dcd.chunk.js",
+    "static/media/taha.png": "/Tsuki/static/media/taha.b8fb14debb0776a2a1f8.png",
+    "static/media/bonzai.ttf": "/Tsuki/static/media/bonzai.03f68840b2f6a7d0465b.ttf",
+    "index.html": "/Tsuki/index.html",
+    "main.b5838503.css.map": "/Tsuki/static/css/main.b5838503.css.map",
+    "main.8428d72d.js.map": "/Tsuki/static/js/main.8428d72d.js.map",
+    "787.28cb0dcd.chunk.js.map": "/Tsuki/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b5838503.css",
+    "static/js/main.8428d72d.js"
+  ]
+}
