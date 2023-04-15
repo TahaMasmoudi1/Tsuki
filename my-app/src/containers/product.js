@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { List, Rate, Typography } from "antd"
 import {Card,Image} from "antd"
 import '../containers/product.css'
-import { HeartFilled, HeartOutlined } from "@ant-design/icons"
+import {  HeartOutlined } from "@ant-design/icons"
 
 
 function Products (){

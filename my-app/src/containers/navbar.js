@@ -1,8 +1,8 @@
 import './navbar.css'
-import ReactDOM  from 'react';
+import ReactDOM, { useEffect }  from 'react';
 import 'antd/dist/reset.css';
 import React, { useState } from 'react';
-import { Menu, Space } from 'antd';
+import { Menu, Space, } from 'antd';
 import logo from './taha.png'
 import { Input ,Button } from 'antd';
 import {FacebookFilled } from '@ant-design/icons'
@@ -18,7 +18,7 @@ import Stickers from './Stickers';
 import Accessoires from './Accesoiries'
 import Tshirt from './tshirts'
 import Hoodie from './hoodies'
-import {Route,Routes,useNavigate} from "react-router-dom"
+import {Route,Routes,useNavigate ,} from "react-router-dom"
 import Account from './account';
 import Coupon from './coupon';
 import Order from './order';
@@ -34,15 +34,20 @@ import Signup from './signup';
 const { Search } = Input;
 function Navbar(){
   const navigate=useNavigate()
+
+
+  window.addEventListener("scroll",function(){
+    var header = document.querySelector("header")
+  header.classList.toggle("sticky",window.scrollY>0) })
   function Menu1(){
     return(
-      <Space>
+      <Space style={{display:"flex-row",height:"100%",width:"100%"}}>
         <Menu 
        
         onClick={({key})=>
         navigate(key)
       }
-        style={{ width:"1366px",height:"100px" ,display:"flex",justifyContent:"space-between", alignItems:"center" ,backgroundColor:"white"}}
+        style={{ position:"sticky"  ,height:"100px", display:"flex",justifyContent:"space-between", alignItems:"center" ,backgroundColor:"white"}}
         mode="horizontal"
          items={[
           
@@ -92,14 +97,22 @@ function Navbar(){
     )
     
   }
+ 
     return(
+     
     
-      <div>
-      <div style={{display:"flex"}}>
-        <Menu1/>
-        </div>
-      <div style={{display:"flex" }}>
-          <Content/>
+      <div > 
+
+     <header style={{display:"flex",position:"", transition:"3s" , zIndex:"10000"}}>
+      
+         <Menu1/> 
+      
+     
+        
+      </header>
+        
+      <div style={{display:"flex" ,position:"",}}>
+          <Content />
           </div>
         
           </div>
@@ -109,14 +122,16 @@ function Navbar(){
     
     
     )
+    
     function Content () {
       return(
         <Routes>
+          
+          <Route path="/connexion" element={<Connexion/>} ></Route>
+         <Route path="/sign-up" element={<Signup/>} ></Route>
          <Route path="/wish"element={<Wish/>} ></Route>
          <Route path="/shop" element={<Shop/>} ></Route>
          <Route path="/home" element={<Home/>} ></Route>
-         <Route path="/connexion" element={<Connexion/>} ></Route>
-         <Route path="/sign-up" element={<Signup/>} ></Route>
          <Route path="/orders" element={<Order/>} ></Route>
          <Route path="/coupons" element={<Coupon/>} ></Route>
          <Route path="/account" element={<Account/>} ></Route>
@@ -125,7 +140,7 @@ function Navbar(){
           <Route path="/tshirt" element={<Tshirt/>}></Route>
           <Route path="/accessoires" element={<Accessoires/>}></Route>
 
-        </Routes>
+          </Routes>
       )
       
     }

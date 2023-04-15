@@ -2,5 +2,8 @@
   "dependencies": {
     "antd": "^5.1.6",
     "save": "^2.9.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
   }
 }
