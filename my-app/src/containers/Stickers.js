@@ -3,6 +3,7 @@ import { List, Rate, Typography } from "antd"
 import {Card,Image} from "antd"
 import '../containers/product.css'
 import {  HeartOutlined } from "@ant-design/icons"
+import './product.css'
 
 function Stickers(){
   
@@ -31,26 +32,22 @@ function Stickers(){
         }
        ,[] )
        return <div>
-        
-          <List items={items} grid={{column:3}} style={{display:"flex",flexWrap:"wrap"}} >
+        <List className="list-card"  data={items} grid={{column:3}}  >
+          <div className="div-card"  >
+            {items.map(item=>(<Card className="card1"   key={item.id} hoverable={true} 
+             cover={<div  id="/product-card" >
+              <Rate className="rate" allowHalf defaultValue={0} 
+              character={<HeartOutlined/>}/>
+             <div className="cardtitle" >{item.title}</div></div>}
+              title={<Image preview={false}  className="image-card" src={item.image}/>  }> 
+            <Card.Meta className="cardmeta" 
               
-              <div  style={{display:"flex",flexWrap:"wrap",margin:"10px"}}>
-                {items.map(item=>(<Card 
-                style={{width:"300px",height:"550px",margin:"10px",alignItems:"center", }} 
-                 key={item.id} 
-                 cover={<div><Rate allowHalf defaultValue={0} character={<HeartOutlined/>} style={{color:"red" ,display:"flex",justifyContent:"center"}}/><div style={{fontFamily:"bonzai",fontSize:"27px",display:"flex",justifyContent:"center"}}>{item.title}</div></div>}
-                  title={<Image className="image-card" src={item.image}/>  }> 
-                <Card.Meta style={{height:"25px" ,}}  
-                description={<p style={{ marginTop:"-10px",fontFamily:"bonzai",fontSize:"20px", color:"rgb(60,120,232)",display:"flex",justifyContent:"center"}}>{item.price}</p>}>
-                  </Card.Meta>   
-                   </Card>           ))}
-              
-                </div>
-    
-         
-           </List>
-             
-            
+            description={<p className="price" >{item.price}</p>}>
+              </Card.Meta> 
+               </Card>  ))}
+          
+            </div>
+       </List>
         
         </div>
     

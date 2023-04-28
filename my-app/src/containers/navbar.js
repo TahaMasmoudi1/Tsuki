@@ -1,8 +1,9 @@
 import './navbar.css'
+
 import ReactDOM, { useEffect }  from 'react';
 import 'antd/dist/reset.css';
 import React, { useState } from 'react';
-import { Menu, Space, } from 'antd';
+import { Menu, Space,Modal } from 'antd';
 import logo from './taha.png'
 import { Input ,Button } from 'antd';
 import {FacebookFilled } from '@ant-design/icons'
@@ -13,90 +14,203 @@ import {UserOutlined} from '@ant-design/icons'
 import {ShoppingCartOutlined } from '@ant-design/icons'
 import {HeartFilled} from '@ant-design/icons'
 import {ShoppingTwoTone} from '@ant-design/icons'
-
+import { Drawer, Table } from "antd"
+import {Image} from "antd"
 import Stickers from './Stickers';
 import Accessoires from './Accesoiries'
 import Tshirt from './tshirts'
 import Hoodie from './hoodies'
-import {Route,Routes,useNavigate ,} from "react-router-dom"
+import { BrowserRouter as Switch,Router,Route,Routes,useNavigate ,Link} from "react-router-dom"
 import Account from './account';
 import Coupon from './coupon';
 import Order from './order';
-import Wish from './wish';
-import Shop from './shop';
 import Home from './home';
-import Connexion from './connexion';
 import Signup from './signup';
-
-
-
+import Cardpage from './card-page';
+import {  GoogleOutlined, TwitterOutlined } from '@ant-design/icons'
+import './login.css'
+import{ Divider, Form , Typography,message} from 'antd'
+import { DisabledContextProvider } from 'antd/es/config-provider/DisabledContext';
 
 const { Search } = Input;
 function Navbar(){
-  const navigate=useNavigate()
+  const [modal1Open, setModal1Open] = useState(false);
+  const [modal2Open,setModal2Open]=useState(false)
+  const [modal3Open, setModal3Open] = useState(false);
 
+  const handleOpen=(e)=>{
+         setModal1Open(true)
+         e.preventDefault();
+  }
+
+  const handleCancel = (event) => {
+    setModal1Open(false)
+    event.preventDefault();
+  }
+  const login=()=>{
+    message.success('Login Successful!')
+    setModal1Open(false)
+    }
+    
+    const handleCancel2 = (event) => {
+      setModal2Open(false)
+      event.preventDefault();
+    }
 
   window.addEventListener("scroll",function(){
     var header = document.querySelector("header")
   header.classList.toggle("sticky",window.scrollY>0) })
   function Menu1(){
     return(
-      <Space style={{display:"flex-row",height:"100%",width:"100%"}}>
-        <Menu 
-       
-        onClick={({key})=>
-        navigate(key)
-      }
-        style={{ position:"sticky"  ,height:"100px", display:"flex",justifyContent:"space-between", alignItems:"center" ,backgroundColor:"white"}}
+
+      <Space >
+        <Menu className='menu'
         mode="horizontal"
          items={[
           
-          { icon:<img src={logo} style={{width:"auto",height:"100px" ,marginTop:"15px",flexGrow:"4"}} />,key:"/home" },
+          {   icon:<img src={logo} className='logo'/>, key:"/home" },
           
          
-          {label: <span style={{fontSize:"28px",fontFamily:"bonzai"}}>Clothes</span> ,key:"clothes",icon:<SkinTwoTone/>,children:[
-            {label:"T-shirts",key:"/tshirt"},
-            {label:"Hoodies",key:"/hoodie"}
+          {label: <span className='menu-label'> Clothes</span> ,key:"clothes",icon:<SkinTwoTone/>,children:[
+            {label:<span><Link to="/tshirt"></Link>T-shirts</span>,key:"/tshirt"},
+            {label:<span><Link to="/hoodie"></Link>Hoodies</span>,key:"/hoodie"}
           ]},
-          {label:<span style={{fontSize:"28px",fontFamily:"bonzai"}}>Accessoires</span>,key:"/accessoires", icon:<ShoppingTwoTone  />},
-          {label:<span style={{fontSize:"28px",fontFamily:"bonzai"}}>Stickers</span>,key:"/stickers",icon:<SmileTwoTone/>},
-          {label:(
-            <Search placeholder="Search Here ..."  enterButton style={{marginTop:"8px",width:"400px"}} />
-
-          ),key:"search"},
-          
-          
+          {label:
+          <span className='menu-label'>
+            <Link to="/accesoires"></Link>
+            Accessoires
+            </span>
+            ,key:"/accessoires"
+            , icon:<ShoppingTwoTone  />},
           {
-            icon:<HeartFilled style={{padding:"-50px"}} />,key:"/wish"
+            label:<span className='menu-label'> <Link to="/stickers"></Link> Stickers</span>,key:"/stickers"
+            ,icon:<SmileTwoTone/>
           },
           {
-            icon:<ShoppingCartOutlined style={{}}/>,
+            label:(<Search placeholder="Search Here ..."  enterButton className='searchbar'/>),
+            key:"search"
+          },
+          {
+            icon:<div> <HeartFilled/></div>,key:"/wish"
+          },
+          {
+            icon: <div  onClick={()=>setModal2Open(true)}  ><ShoppingCartOutlined className='shop'  ></ShoppingCartOutlined></div>,
             key:"/shop"
           },
-          {icon:
-            <a style={{}}><FacebookFilled /></a>
-          ,key:"facebook"},
-          {icon:
-            <a style={{}}><InstagramFilled /></a>
-          ,key:"instagram"},
           {
-            icon:<UserOutlined style={{}} />,children:[ 
+            icon:<UserOutlined  style={{}} />,children:[ 
             {label:"My Account" ,key:"/account"},
-            {label: <Button  > Sign up</Button> , key:"/sign-up"},
-            {label:<Button type="primary" >Connexion</Button>, key:"/connexion"},
+            {label: <Button    > Sign up</Button> , },
+            {label:<Button onClick={handleOpen} type="primary" >Connexion</Button>, },
             {label:<hr></hr>},
             {label:"My Orders" ,key:"/orders"},
             {label:"My Coupons" ,key:"/coupons"}]
           }]}>
            
-            
-
+           
         </Menu>
+        <Wish></Wish>
+        <Modal  style={{top:"150px"}}
+        key={DisabledContextProvider}
+        open={modal1Open }
+         footer={null} 
+         onCancel={handleCancel}
+       
+      >
+         <div className='login'>
+          <div className='loginform'>
+          <Form hideRequiredMark onFinish={login}>
+            <Typography.Title style={{ color:"white",fontFamily:"bonzai",display:"flex",justifyContent:"center"}}><span>Welcome</span></Typography.Title>
+          <Form.Item style={{textDecoration:"none"}} className='email'  label={<span style={{color:"white" ,fontFamily:"bonzai",fontSize:"35px" ,marginRight:"-6px",marginTop:"-9px"}}>Email:</span>} name={"myEmail"} rules={[{required:true,type:"email",message:"Please enter valid email"}]}>
+            <Input placeholder="Enter your email"/>
+          </Form.Item>
+          <Form.Item style={{fontFamily:"bonzai"}} label={<div style={{textDecoration:"none",color:"white" ,fontFamily:"bonzai",fontSize:"35px",marginRight:"-6px",marginTop:"-9px"}}>Password:</div>} name={"myPassword"} rules={[{ required:true ,message:"Please enter your password" }]}>
+            <Input.Password placeholder="Enter your password"/>
+          </Form.Item>
+          <Button type='primary' htmlType='submit' block>Login</Button>
+          <Divider style={{borderColor:"white"}}><span style={{ fontSize:"30px",fontFamily:"bonzai" ,color:"white"}}>or Login with</span></Divider>
+          <div className='social'>
+            <GoogleOutlined style={{color:"red" ,cursor:"pointer"}} onClick={login}/>
+            <FacebookFilled style={{color:"blue" ,cursor:"pointer"}}  onClick={login}/>
+            <TwitterOutlined style={{color:"cyan" ,cursor:"pointer"}}  onClick={login}/>
+          </div>
+          </Form>
+          </div>
+          </div>
+      </Modal>
+      
         
         </Space>
     )
     
   }
+
+
+
+
+const  Wish=()=>{
+    const[items ,setItems]=useState([])
+    const api_url="http://localhost:3000/products"
+    const[fetchError,setFetcherror]=useState(null)
+
+    useEffect(()=>{
+        const Fetchitems=async()=>{
+             try{
+              const response= await fetch(api_url);
+              if(!response.ok) throw Error("did not recived expected data")
+              const listitems= await response.json();
+              console.log(listitems)
+              setItems(listitems);
+             setFetcherror(null)
+             
+        }catch(err){setFetcherror(err.message)}}
+          
+            (async()=> await Fetchitems())(); 
+    }
+   ,[] )
+         
+    const columns=[
+        {
+            id:"1",
+            title:"Image",
+            dataIndex:"image",
+            render: theimageurl =><img style={{width:"70px",height:"90px"}} alt={theimageurl} src={theimageurl}/>
+        },
+        {
+            id:"1",
+            title:"Name",
+            dataIndex:"title"
+        },
+        {
+            id:"2",
+            title:"Price",
+            dataIndex:"price"
+        },
+        {
+            id:"3",
+            title:"Quantity",
+            dataIndex:"stock"
+        },
+        {
+            id:"4",
+            title:"Action",
+            dataindex:""
+        }
+
+    ]
+         return(
+        <div>
+            <Drawer visible={true} style={{}} closable={true} onClose={handleCancel2} open={modal2Open}>
+            
+            <Table columns={columns}
+            dataSource={items}>
+
+            </Table>
+            </Drawer>
+        </div>)
+    
+}
+
  
     return(
      
@@ -106,12 +220,13 @@ function Navbar(){
      <header style={{display:"flex",position:"", transition:"3s" , zIndex:"10000"}}>
       
          <Menu1/> 
-      
-     
-        
+ 
+         
       </header>
         
       <div style={{display:"flex" ,position:"",}}>
+      
+     
           <Content />
           </div>
         
@@ -122,15 +237,15 @@ function Navbar(){
     
     
     )
+
     
     function Content () {
       return(
+        
         <Routes>
-          
-          <Route path="/connexion" element={<Connexion/>} ></Route>
+                <Route path="/card-page" element={<Cardpage/>}/>
+
          <Route path="/sign-up" element={<Signup/>} ></Route>
-         <Route path="/wish"element={<Wish/>} ></Route>
-         <Route path="/shop" element={<Shop/>} ></Route>
          <Route path="/home" element={<Home/>} ></Route>
          <Route path="/orders" element={<Order/>} ></Route>
          <Route path="/coupons" element={<Coupon/>} ></Route>
@@ -139,11 +254,13 @@ function Navbar(){
           <Route path="/hoodie" element={<Hoodie/>}></Route>
           <Route path="/tshirt" element={<Tshirt/>}></Route>
           <Route path="/accessoires" element={<Accessoires/>}></Route>
-
           </Routes>
+          
+          
       )
       
     }
+    
     
 }
 export default Navbar;

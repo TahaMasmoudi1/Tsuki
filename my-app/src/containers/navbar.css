@@ -30,3 +30,29 @@ opacity: 50%;
     justify-content: center;
     height: 10px;
  }
+ card.hover{
+   box-shadow: 5px;
+ }
+.menu{
+position: sticky;
+width: 1366px;
+height: 100px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+background-color: white;
+}
+.logo{
+   width: auto;
+   height: 100px;
+   margin-top: 15px;
+   flex-grow: 4;
+}
+.menu-label{
+   font-size: 27px;
+   font-family: bonzai;
+}
+.searchbar{
+   margin-top: 8px;
+   width: 400px;
+}

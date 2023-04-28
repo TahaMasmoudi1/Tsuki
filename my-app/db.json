@@ -37,6 +37,15 @@
     "rating":[],
     "category":["T-shirt"],
     "stock":[20]  
+},
+{
+    "id":5,
+    "title":"T-shirt Batman",
+    "price":"29,990 TND",
+    "image":["https://hamedia.b-cdn.net/catalog/product/cache/1/small_image/440x/17f82f742ffe127f42dca9de82fb58b1/0/0/0029355_1.jpg"],
+    "rating":[],
+    "category":["T-shirt"],
+    "stock":[20]
 }
 ],
 "stickers":[

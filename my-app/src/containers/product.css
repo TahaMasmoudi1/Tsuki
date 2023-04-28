@@ -4,3 +4,46 @@
 .image-card{
     height: 400px !important;
 }
+.card1{
+    height: 550px;
+    width: 300px;
+    margin: 10px;
+    align-items: center;
+}
+.cardmodal{
+    height: 900px;
+}
+.cardtitle{
+ display: flex;
+font-family: bonzai; 
+font-size: 27px;   
+justify-content: center;
+align-items: center;}
+.rate{
+    justify-content: center;
+    display: flex;
+    color: red;
+}
+.price{
+    margin-top: -10px;
+    font-family: bonzai;
+    font-size: 20px;
+    color:rgb(60, 120, 232);
+    display: flex;
+    justify-content: center;
+    
+    
+}
+
+.cardmeta{
+    height: 25px;
+}
+.div-card{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px;
+}
+.list-card{
+    display: flex;
+    flex-wrap: wrap;
+}

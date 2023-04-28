@@ -1,13 +1,19 @@
 import { Switch } from "antd";
-import { Route, Router } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
+import{ Route, Router } from "react-router-dom";
 import Navbar from "./containers/navbar";
+import { Context } from "./containers/card-modal";
 function App() {
   return (
    
 
     
     <div className="App">
-      <Navbar/>
+         
+            <Navbar/>
+      
+      
+
     </div>
 
   );
