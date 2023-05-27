@@ -1,41 +1,93 @@
-import { Children, createContext, useContext, useEffect, useState } from "react"
-import { Button, ConfigProvider, List, Rate, Typography } from "antd"
-import {Card,Image,Modal,Form,Radio} from "antd"
+import { useContext, useEffect, useState } from "react"
+import { Button,List, Rate, Typography, message,Drawer,Table } from "antd"
+import {Card,Image,Modal,Form,Radio,} from "antd"
 import '../containers/product.css'
-import Cardpage from "./card-page"
-import { Route,Routes,useNavigate} from "react-router-dom"
-import {  HeartOutlined } from "@ant-design/icons"
+import {  HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons"
 import { InputNumber } from 'antd';
-import { cartContext } from "./card-modal"
-
-
-
-
-function Products (props ){
+import Shop from './CardShop'
+import Orders from './orders'
+function Products (){
  
   const [modal1Open, setModal1Open] = useState(false);
+  const [openDrawer1,setopenDrawer1]= useState(false);
 
   const api_url="http://localhost:3000/products"
-  const radioStyle = {
-    color: 'red'
-  };
     const[items ,setItems]=useState([])
-
     const[fetchError,setFetcherror]=useState(null)
-    const navigate=useNavigate()
-    const[title,setTitle]=useState('')
+    const[ItemIndex,setItemIndex]=useState()
+    const [XXLsize,setXXLsize]=useState(0)
+    const [XLsize,setXLsize]=useState(0)
+    const [Lsize,setLsize]=useState(0)
+    const [Msize,setMsize]=useState(0)
+    const [Ssize,setSsize]=useState(0)
+    const [XSsize,setXSsize]=useState(0)
 
-    function click(){
+    const [Redcolor,setRedcolor]=useState(false)
+    const [Bluecolor,setBluecolor]=useState(false)
+    const [Greencolor,setGreencolor]=useState(false)
+    const [Whitecolor,setWhitecolor]=useState(false)
+    const [Blackcolor,setBlackcolor]=useState(false)
+
+
+
+    var RedInput=()=>{
+      setRedcolor(true)
+    }
+    var BlueInput=()=>{
+      setBluecolor(true)
+    }
+    var BlackInput=()=>{
+      setBlackcolor(true)
+    }
+    var GreenInput=()=>{
+      setGreencolor(true)
+    }
+    var WhiteInput=()=>{
+      setWhitecolor(true)
+    }
+
+    
+    var  XSinput=(value)=>{
+      setXSsize(value)
+    };
+    var  Sinput=(value)=>{
+      setSsize(value)
+    };
+    var  Minput=(value)=>{
+      setMsize(value)
+    };
+    var  Linput=(value)=>{
+      setLsize(value)
+    };
+    var XLinput=(value)=>{
+      setXLsize(value)
+    };
+    var XXLinput=(value)=>{
+      setXXLsize(value)
+    };
+    function CancelDrawer(){
+   setopenDrawer1(false)
+    }
+   
+    function AddToCart(index){
+      if ((XSsize!==0 || Ssize!==0 || Msize!==0 || Lsize!==0 || XLsize!==0 || XXLsize!==0) && (Redcolor===true|| Blackcolor===true || Whitecolor===true || Greencolor===true ||Bluecolor===true)){
+        message.success('Aded to cart Successfully!')
+        cancel(true)
+      }
+      else{
+        message.error("Please pick a color and the size to add the item in your cart ")
+      }
+      
+    }
+    
+
+
+    function click(index){
+      setItemIndex(index)
       setModal1Open(true) 
     }
     function cancel (){
       setModal1Open(false)
-    }
-    const addtoModal=(items)=>{
-      const newProduct={
-         ...items,count:1
-      }
-      setItems([...items,newProduct])
     }
     useEffect(()=>{
         const Fetchitems=async()=>{
@@ -52,26 +104,107 @@ function Products (props ){
             (async()=> await Fetchitems())(); 
     }
    ,[] )
-   const Globalstate=useContext(cartContext)
-   console.log(Globalstate)
+   
 
    return(
-  
     
-    <div >
+
+    
+    <div>
       
-        <Modal data={items} width={1200} className="cardmodal" footer={null} onCancel={cancel}  open={modal1Open}>
-         <h1>{title}</h1>
+        <Modal data={items[ItemIndex]} width={900} className="cardmodal" footer={null} onCancel={cancel}  open={modal1Open}>
+         <div className="modal-item-div">
+
+  <div className="div-images">
+          <Image.PreviewGroup >
+                <Image 
+                     className="image-preview"
+                     height={250}
+                     width={175}  
+                  src={items[ItemIndex]?.image}/>
+                    <Image
+                          height={250}  
+                          width={175}
+                          src={items[ItemIndex]?.image} />
+                   <Image
+                          height={250}  
+                          width={175}
+                          src={items[ItemIndex]?.image} />
+                    <Image
+                          height={250} 
+                          width={175} 
+                          src={items[ItemIndex]?.image} />
+             </Image.PreviewGroup>
+  </div>
+  <div className="modal-item-container"> 
+          <div className="modal-item-title">
+            <h1>{items[ItemIndex]?.title}</h1>
+           <HeartOutlined className="modal-heartIcon"/>
+           </div>   
+           <Typography id="reference" italic>Reference: 0{items[ItemIndex]?.id}</Typography>
+     
+          <h3 id="modal-price">{items[ItemIndex]?.price}</h3>
+          <h3 id="modal-description">Description:</h3>
+          <p id="description-text">{items[ItemIndex]?.description}</p>
+          <h3 className="modal-size-color">Colors:</h3>
+          <div className="div-radio">
+          <div id="radios">
+  <label  id="red" className="color-label" for="input1"></label>
+  <input value="false" onChange={RedInput} id="input1" name="radio" type="radio"/>
+  <label id="blue" className="color-label" for="input2"></label>
+  <input value="false"  onChange={BlueInput}  id="input2" name="radio" type="radio" />
+  <label id="black" className="color-label" for="input3"></label>
+  <input value="false" onChange={BlackInput}  id="input3" name="radio" type="radio" />
+  <label id="white" className="color-label" for="input4"></label>
+  <input value="false"  onChange={WhiteInput}  id="input4" name="radio" type="radio" />
+  <label id="green" className="color-label" for="input5"></label>
+  <input value="false"  onChange={GreenInput}  id="input5" name="radio" type="radio" />
+  <span id="slider"></span>
+</div>
+</div>
+          <h3 className="modal-size-text">Sizes:</h3>
+          <div className="size-div">
+            <div className="size">   
+             <label className="size-label">XS</label>
+             <InputNumber className="input-size" min={0}  defaultValue={0} onChange={XSinput} />
+            </div>
+            <div className="size">   
+             <label className="size-label">S</label>
+             <InputNumber className="input-size" min={0}  defaultValue={0} onChange={Sinput} />
+            </div>
+            <div className="size">   
+             <label className="size-label">M</label>
+             <InputNumber className="input-size" min={0}  defaultValue={0} onChange={Minput} />
+            </div>
+            <div className="size">   
+             <label className="size-label">L</label>
+             <InputNumber className="input-size" min={0}  defaultValue={0} onChange={Linput} />
+            </div>
+            <div className="size">   
+             <label className="size-label">XL</label>
+             <InputNumber className="input-size" min={0}  defaultValue={0} onChange={XLinput} />
+            </div>
+            <div className="size">   
+             <label className="size-label">XXL</label>
+             <InputNumber className="input-size" min={0}  defaultValue={0} onChange={XXLinput} />
+            </div>
+          </div>
+          <div className="addtocart"><Button onClick={()=>AddToCart()} type="primary">Add to cart <ShoppingCartOutlined id="shop-icon"/></Button></div>
+          
+          
+         
+         </div>
+  </div>
               </Modal>
     
-      
+     
      <div>
       <List className="list-card"  grid={{column:3}}  >
           <div className="div-card"  >
-            {items.map(item=>(
+            {items.map((item,index)=>(
               
           
-            <Card data={item} className="card1"  onClick={click} key={item.id} hoverable={true} 
+            <Card data={item} className="card1"  onClick={()=>click(index)} key={item.id} hoverable={true} 
              cover={<div id="/product-card" >
               <Rate className="rate" allowHalf defaultValue={0} 
               character={<HeartOutlined/>}/>

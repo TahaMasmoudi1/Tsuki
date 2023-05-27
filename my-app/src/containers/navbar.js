@@ -1,5 +1,4 @@
 import './navbar.css'
-
 import ReactDOM, { useEffect }  from 'react';
 import 'antd/dist/reset.css';
 import React, { useState } from 'react';
@@ -17,20 +16,18 @@ import {ShoppingTwoTone} from '@ant-design/icons'
 import { Drawer, Table } from "antd"
 import {Image} from "antd"
 import Stickers from './Stickers';
-import Accessoires from './Accesoiries'
+import Accessoires from './friendshipBracelet'
 import Tshirt from './tshirts'
 import Hoodie from './hoodies'
 import { BrowserRouter as Switch,Router,Route,Routes,useNavigate ,Link} from "react-router-dom"
 import Account from './account';
-import Coupon from './coupon';
-import Order from './order';
 import Home from './home';
-import Signup from './signup';
-import Cardpage from './card-page';
 import {  GoogleOutlined, TwitterOutlined } from '@ant-design/icons'
 import './login.css'
 import{ Divider, Form , Typography,message} from 'antd'
 import { DisabledContextProvider } from 'antd/es/config-provider/DisabledContext';
+import Products from './product';
+import FriendshipBracelet from "./friendshipBracelet"
 
 const { Search } = Input;
 function Navbar(){
@@ -56,6 +53,19 @@ function Navbar(){
       setModal2Open(false)
       event.preventDefault();
     }
+    const openModal3=()=>{
+      setModal3Open(true)
+      
+}
+const closemodal3=(e)=>{
+  setModal3Open(false)
+}
+const SignUp =()=>{
+ setModal3Open(false)
+ message.success('Account Aded Successfully!')
+
+}
+
 
   window.addEventListener("scroll",function(){
     var header = document.querySelector("header")
@@ -77,11 +87,14 @@ function Navbar(){
           ]},
           {label:
           <span className='menu-label'>
-            <Link to="/accesoires"></Link>
             Accessoires
             </span>
             ,key:"/accessoires"
-            , icon:<ShoppingTwoTone  />},
+            , icon:<ShoppingTwoTone  />,children:[
+              {label:<span><Link to="/friendship-bracelet"></Link>Friendship Bracelet</span>},
+              {label:<span><Link to="/jewelry"></Link>Jewelry</span>}
+
+            ]},
           {
             label:<span className='menu-label'> <Link to="/stickers"></Link> Stickers</span>,key:"/stickers"
             ,icon:<SmileTwoTone/>
@@ -99,17 +112,14 @@ function Navbar(){
           },
           {
             icon:<UserOutlined  style={{}} />,children:[ 
-            {label:"My Account" ,key:"/account"},
-            {label: <Button    > Sign up</Button> , },
+            {label:<Button > <Link to="/account"></Link> My Account</Button> , },
+            {label: <Button onClick={openModal3}> Sign up</Button> , },
             {label:<Button onClick={handleOpen} type="primary" >Connexion</Button>, },
-            {label:<hr></hr>},
-            {label:"My Orders" ,key:"/orders"},
-            {label:"My Coupons" ,key:"/coupons"}]
+          ]
           }]}>
            
            
         </Menu>
-        <Wish></Wish>
         <Modal  style={{top:"150px"}}
         key={DisabledContextProvider}
         open={modal1Open }
@@ -120,15 +130,15 @@ function Navbar(){
          <div className='login'>
           <div className='loginform'>
           <Form hideRequiredMark onFinish={login}>
-            <Typography.Title style={{ color:"white",fontFamily:"bonzai",display:"flex",justifyContent:"center"}}><span>Welcome</span></Typography.Title>
-          <Form.Item style={{textDecoration:"none"}} className='email'  label={<span style={{color:"white" ,fontFamily:"bonzai",fontSize:"35px" ,marginRight:"-6px",marginTop:"-9px"}}>Email:</span>} name={"myEmail"} rules={[{required:true,type:"email",message:"Please enter valid email"}]}>
+            <Typography.Title style={{ color:"black",fontFamily:"bonzai",display:"flex",justifyContent:"center"}}><span>Welcome To Tsuki</span></Typography.Title>
+          <Form.Item style={{textDecoration:"none"}} className='email'  label={<span style={{color:"black" ,fontFamily:"bonzai",fontSize:"35px" ,marginRight:"-6px",marginTop:"-9px"}}>Email:</span>} name={"myEmail"} rules={[{required:true,type:"email",message:"Please enter valid email"}]}>
             <Input placeholder="Enter your email"/>
           </Form.Item>
-          <Form.Item style={{fontFamily:"bonzai"}} label={<div style={{textDecoration:"none",color:"white" ,fontFamily:"bonzai",fontSize:"35px",marginRight:"-6px",marginTop:"-9px"}}>Password:</div>} name={"myPassword"} rules={[{ required:true ,message:"Please enter your password" }]}>
+          <Form.Item style={{fontFamily:"bonzai"}} label={<div style={{textDecoration:"none",color:"black" ,fontFamily:"bonzai",fontSize:"35px",marginRight:"-6px",marginTop:"-9px"}}>Password:</div>} name={"myPassword"} rules={[{ required:true ,message:"Please enter your password" }]}>
             <Input.Password placeholder="Enter your password"/>
           </Form.Item>
-          <Button type='primary' htmlType='submit' block>Login</Button>
-          <Divider style={{borderColor:"white"}}><span style={{ fontSize:"30px",fontFamily:"bonzai" ,color:"white"}}>or Login with</span></Divider>
+          <Button   type='primary' htmlType='submit' block><span style={{fontFamily:"bonzai",fontSize:"25px" ,marginTop:"-9px"}}>Login</span></Button>
+          <Divider style={{borderColor:"black"}}><span style={{ fontSize:"30px",fontFamily:"bonzai" ,color:"black"}}>or Login with</span></Divider>
           <div className='social'>
             <GoogleOutlined style={{color:"red" ,cursor:"pointer"}} onClick={login}/>
             <FacebookFilled style={{color:"blue" ,cursor:"pointer"}}  onClick={login}/>
@@ -138,78 +148,42 @@ function Navbar(){
           </div>
           </div>
       </Modal>
-      
+
+      <Modal key={DisabledContextProvider} footer={null}  onCancel={closemodal3} open={modal3Open} >
+   <div className='signup-div'> 
+   <div className='div-form'>
+    <Form hideRequiredMark onFinish={SignUp}> 
+    <Typography.Title style={{ color:"black",fontFamily:"bonzai",display:"flex",justifyContent:"center"}}><span>Welcome To Tsuki</span></Typography.Title>
+    <Form.Item  className='email'  label={<span style={{color:"black" ,fontFamily:"bonzai",fontSize:"35px" ,marginRight:"-6px",marginTop:"-9px"}}>Username:</span>} name={"myName"} rules={[{required:true,message:"Please enter Your Name"}]}>
+            <Input placeholder="Enter your Name"/>
+          </Form.Item>
+    <Form.Item  className='email'  label={<span style={{color:"black" ,fontFamily:"bonzai",fontSize:"35px" ,marginRight:"-6px",marginTop:"-9px"}}>Email:</span>} name={"myEmail"} rules={[{required:true,type:"email",message:"Please enter valid email"}]}>
+            <Input placeholder="Enter your Email"/>
+          </Form.Item>
+          <Form.Item style={{fontFamily:"bonzai"}} label={<div style={{textDecoration:"none",color:"black" ,fontFamily:"bonzai",fontSize:"35px",marginRight:"-6px",marginTop:"-9px"}}>Password:</div>} name={"myPassword"} rules={[{ required:true ,message:"Please enter your password" }]}>
+            <Input.Password placeholder="Enter your Password"/>
+          </Form.Item>
+          <Button className='signUp-button' type='primary' htmlType='submit' block><span className='sign-up-span' >Sign Up</span></Button>
+          <Divider style={{borderColor:"black"}}><span style={{ fontSize:"30px",fontFamily:"bonzai" ,color:"black"}}>or Login with</span></Divider>
+          <div className='social'>
+            <GoogleOutlined style={{color:"red" ,cursor:"pointer"}} onClick={login}/>
+            <FacebookFilled style={{color:"blue" ,cursor:"pointer"}}  onClick={login}/>
+            <TwitterOutlined style={{color:"cyan" ,cursor:"pointer"}}  onClick={login}/>
+          </div>
+
+    </Form>
+    </div>
+   </div>
+
+</Modal>
         
         </Space>
+
+
     )
     
   }
-
-
-
-
-const  Wish=()=>{
-    const[items ,setItems]=useState([])
-    const api_url="http://localhost:3000/products"
-    const[fetchError,setFetcherror]=useState(null)
-
-    useEffect(()=>{
-        const Fetchitems=async()=>{
-             try{
-              const response= await fetch(api_url);
-              if(!response.ok) throw Error("did not recived expected data")
-              const listitems= await response.json();
-              console.log(listitems)
-              setItems(listitems);
-             setFetcherror(null)
-             
-        }catch(err){setFetcherror(err.message)}}
-          
-            (async()=> await Fetchitems())(); 
-    }
-   ,[] )
-         
-    const columns=[
-        {
-            id:"1",
-            title:"Image",
-            dataIndex:"image",
-            render: theimageurl =><img style={{width:"70px",height:"90px"}} alt={theimageurl} src={theimageurl}/>
-        },
-        {
-            id:"1",
-            title:"Name",
-            dataIndex:"title"
-        },
-        {
-            id:"2",
-            title:"Price",
-            dataIndex:"price"
-        },
-        {
-            id:"3",
-            title:"Quantity",
-            dataIndex:"stock"
-        },
-        {
-            id:"4",
-            title:"Action",
-            dataindex:""
-        }
-
-    ]
-         return(
-        <div>
-            <Drawer visible={true} style={{}} closable={true} onClose={handleCancel2} open={modal2Open}>
-            
-            <Table columns={columns}
-            dataSource={items}>
-
-            </Table>
-            </Drawer>
-        </div>)
-    
-}
+  
 
  
     return(
@@ -243,17 +217,12 @@ const  Wish=()=>{
       return(
         
         <Routes>
-                <Route path="/card-page" element={<Cardpage/>}/>
-
-         <Route path="/sign-up" element={<Signup/>} ></Route>
-         <Route path="/home" element={<Home/>} ></Route>
-         <Route path="/orders" element={<Order/>} ></Route>
-         <Route path="/coupons" element={<Coupon/>} ></Route>
+           <Route path="/home" element={<Home/>} ></Route>
          <Route path="/account" element={<Account/>} ></Route>
-          <Route path="/stickers"element={<Stickers/>}></Route>
+         <Route path="/stickers"element={<Stickers/>}></Route>
           <Route path="/hoodie" element={<Hoodie/>}></Route>
           <Route path="/tshirt" element={<Tshirt/>}></Route>
-          <Route path="/accessoires" element={<Accessoires/>}></Route>
+          <Route path="/friendship-bracelet" element={<FriendshipBracelet/>}></Route>
           </Routes>
           
           

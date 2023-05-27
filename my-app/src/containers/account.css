@@ -1,0 +1,53 @@
+.account-card{
+    display:flex;
+margin-top: 15px;
+    justify-content: center;
+    height: 330px;
+    width: 300px;
+    margin-left: 40px;
+    box-shadow: 5px 6px 20px 5px rgba(110, 112, 121, 0.5);
+
+}
+
+.account-container{
+    display: flex;
+}
+.account-content{
+    box-shadow: 5px 6px 20px 5px rgba(110, 112, 121, 0.5);
+    margin-left: 50px;
+    margin-top: 15px;
+    border-radius: 6px ;
+    width: 900px;
+}
+.dashbord{
+    display:flex;
+    flex-direction: column;
+}
+#mail{
+    margin-top: -5px;
+}
+
+.menu-account-div{
+    box-shadow: 5px 6px 20px 5px rgba(110, 112, 121, 0.5);
+    margin-top: 20px;
+    margin-left: 45px;
+    border-radius: 6px;
+}
+.card-title{
+    font-family: bonzai;
+    font-size:30px ;
+}
+#order{
+    color: grey;
+    margin-top: -10px;
+}
+#phone{
+    color: black;
+    margin-top: -7px;
+}
+#position{
+    margin-top: -7px;
+}
+.avatar{
+    margin-left: 20px;
+}
